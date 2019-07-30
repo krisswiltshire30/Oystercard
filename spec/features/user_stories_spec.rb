@@ -1,16 +1,15 @@
-require './lib/oyster_card.rb'
 
+require './lib/oyster_card.rb'
+require './lib/station.rb'
 describe Oystercard do
   subject(:oystercard) { described_class.new }
 
   describe 'User Stories' do
-
     describe '#top_up' do
       # In order to use public transport
       # As a customer
       # I want money on my card
       it 'in order to use public transport, money should be put onto the oystercard' do
-
         expect { oystercard.top_up(1) }.not_to raise_error
       end
     end
@@ -24,21 +23,23 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
-  # In order to pay for my journey
-  # As a customer
-  # When my journey is complete, I need the correct amount deducted from my card
-  it 'Should deduct money from balance when touched out' do
-    expect{ oystercard.touch_out('Oxford Street')}.to change {oystercard.balance}.by(-Oystercard::MIN_CHARGE)
+    # In order to pay for my journey
+    # As a customer
+    # When my journey is complete, I need the correct amount deducted from my card
+    it 'Should deduct money from balance when touched out' do
+      expect { oystercard.touch_out('Oxford Street') }.to change { oystercard.balance }.by(-Oystercard::MIN_CHARGE)
+    end
   end
 end
 
-  describe 'previous trips' do
-    # In order to know where I have been
+describe Station do
+
+  describe 'Zones' do
+    # In order to know how far I have travelled
     # As a customer
-    # I want to see all my previous trips
-    # it 'Should output previous trips' do
-    #   allow oystercard.to receive(:journey_list).and_return ({'Old Street' => 'Oxford Street'})
-    #   expect(oystercard.journey_list).to eq {'Old Street' => 'Oxford Street'}
-    # end
+    # I want to know what zone a station is in
+    it 'should output what zone a station is in' do
+
+  end
   end
 end
