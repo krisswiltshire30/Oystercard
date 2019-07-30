@@ -26,12 +26,6 @@ describe Oystercard do
     end
   end
 
-  describe '#deduct' do
-    it 'deducts amount from balance' do
-      expect { subject.deduct 5 }.to change { subject.balance }.by -5
-    end
-  end
-
   describe '#touch_in' do
     it 'In journey should return true if touched in' do
       oystercard = Oystercard.new(1)
