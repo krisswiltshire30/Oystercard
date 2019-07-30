@@ -31,4 +31,11 @@ describe Oystercard do
     expect{ oystercard.touch_out}.to change {oystercard.balance}.by(-Oystercard::MIN_CHARGE)
   end
 end
+  # In order to pay for my journey
+  # As a customer
+  # I need to know where I've travelled from
+  it 'Oystercard should record where journey started' do
+    oystercard = Oystercard.new(Oystercard::MAX_VALUE)
+    expect{oystercard.touch_in('Old Street')}.to change {oystercard.entry_station}.to 'Old Street'
+  end
 end

@@ -1,35 +1,31 @@
-# frozen_string_literal: true
-
 class Oystercard
-  attr_reader :balance, :in_journey
+  attr_reader :balance, :in_journey, :entry_station
 
   MAX_VALUE = 90
   MIN_CHARGE = 1
 
   def initialize(balance = 0)
     @balance = balance
-    @in_journey = false
+    @entry_station = nil
   end
 
   def top_up(amount = 0)
     raise "Cannot top up above £#{MAX_VALUE}" if (amount + @balance) > MAX_VALUE
-
     @balance += amount
   end
 
-  def in_journey?(in_out)
-    @in_journey = in_out
+  def in_journey?
+    entry_station
   end
 
-  def touch_in
+  def touch_in(station)
     raise 'Error: insufficient balance' if @balance < MIN_CHARGE
-
-    in_journey?(true)
+    @entry_station = station
   end
 
   def touch_out
-    in_journey?(false)
     deduct(MIN_CHARGE)
+    @entry_station = nil
   end
 
 private
