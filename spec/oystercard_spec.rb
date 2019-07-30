@@ -22,11 +22,6 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
-    it 'In journey should return entry_station if touched in' do
-      oystercard = Oystercard.new(1)
-      oystercard.touch_in('Old Street')
-      expect(oystercard.in_journey?).to eq 'Old Street'
-    end
 
     it 'throws an error if a card is touched in with insufficient balance' do
       oystercard = Oystercard.new(0)
@@ -38,17 +33,6 @@ describe Oystercard do
     let(:entry_station) { double :station }
     let(:exit_station) { double :station }
     let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
-
-    it 'should reset entry station if touched out' do
-      subject.touch_out('Oxford Street')
-      expect(subject.in_journey?).to eq nil
-    end
-
-    it 'stores exit station' do
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.exit_station).to eq exit_station
-    end
 
   describe '#journey' do
 
