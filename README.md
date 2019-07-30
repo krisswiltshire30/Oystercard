@@ -1,8 +1,11 @@
-##Oystercard Challenge
+#Oystercard Challenge
+
+#Process
+- Focus on TDD
 
 
 
-##User Storys
+#User Storys
 
 In order to use public transport
 As a customer

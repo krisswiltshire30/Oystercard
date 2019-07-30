@@ -1,32 +1,14 @@
 require 'oyster_card.rb'
 
 describe Oystercard do
+  subject(:oystercard) { described_class.new }
+
   it 'has balance functionality' do
     expect(subject).to respond_to :balance
   end
 
   it 'topup can take amount from user' do
     expect(subject).to respond_to(:top_up).with(1).argument
-  end
-
-  it 'has deduct functionality' do
-    expect(subject).to respond_to :deduct
-  end
-
-  it 'has a "in journey" status' do
-    expect(subject).to respond_to :in_journey
-  end
-
-  it 'has in journey functionality' do
-    expect(subject).to respond_to :in_journey?
-  end
-
-  it 'has in touch in functionality' do
-    expect(subject).to respond_to :touch_in
-  end
-
-  it 'has in touch out functionality' do
-    expect(subject).to respond_to :touch_out
   end
 
   it 'journey will take one argument' do
@@ -51,14 +33,19 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
-    it 'Should return true' do
-      subject.touch_in
-      expect(subject.in_journey).to eq true
+    it 'In journey should return true if touched in' do
+      oystercard = Oystercard.new(1)
+      oystercard.touch_in
+      expect(oystercard.in_journey).to eq true
+    end
+
+    it 'throws an error if a card is touched in with insufficient balance' do
+      expect { subject.touch_in }.to raise_error 'Error: insufficient balance'
     end
   end
 
   describe '#touch_out' do
-    it 'Should return false' do
+    it 'In journey should return false if touched out' do
       subject.touch_out
       expect(subject.in_journey).to eq false
     end
