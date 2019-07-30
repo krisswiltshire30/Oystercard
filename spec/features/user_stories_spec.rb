@@ -28,7 +28,7 @@ describe Oystercard do
   # As a customer
   # When my journey is complete, I need the correct amount deducted from my card
   it 'Should deduct money from balance when touched out' do
-    expect{ oystercard.touch_out}.to change {oystercard.balance}.by(-Oystercard::MIN_CHARGE)
+    expect{ oystercard.touch_out('Oxford Street')}.to change {oystercard.balance}.by(-Oystercard::MIN_CHARGE)
   end
 end
   # In order to pay for my journey
@@ -37,5 +37,15 @@ end
   it 'Oystercard should record where journey started' do
     oystercard = Oystercard.new(Oystercard::MAX_VALUE)
     expect{oystercard.touch_in('Old Street')}.to change {oystercard.entry_station}.to 'Old Street'
+  end
+
+  describe 'previous trips' do
+    # In order to know where I have been
+    # As a customer
+    # I want to see all my previous trips
+    # it 'Should output previous trips' do
+    #   allow oystercard.to receive(:journey_list).and_return ({'Old Street' => 'Oxford Street'})
+    #   expect(oystercard.journey_list).to eq {'Old Street' => 'Oxford Street'}
+    # end
   end
 end
